@@ -8,7 +8,7 @@ Centralized Claude Code configuration — agents, knowledge vaults, and plugins 
 claude-hub/
 ├── common/
 │   ├── agents/        # Global agents, symlinked to ~/.claude/agents/ by /apply
-│   └── vaults/        # Shared knowledge vaults (git submodules)
+│   └── vaults/        # Shared knowledge vaults (committed directories)
 ├── projects/
 │   └── embedded/      # Embedded Linux project config (git submodule → tqusr/claude-embedded)
 │       ├── agents/    # Project-specific agents
@@ -28,8 +28,7 @@ ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
 
 Then run `/apply` in a Claude Code session. It will:
 1. Symlink all common agents into `~/.claude/agents/`
-2. Clone any common vaults
-3. Install plugins (`superpowers`, `claude-hud`)
+2. Install plugins (`superpowers`, `claude-hud`)
 
 ## Working on the Embedded Project
 
