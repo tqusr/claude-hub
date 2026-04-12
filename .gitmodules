@@ -1,3 +1,3 @@
-[submodule "projects/atlas"]
-	path = projects/atlas
-	url = ./projects/atlas
+[submodule "projects/embedded"]
+	path = projects/embedded
+	url = ./projects/embedded

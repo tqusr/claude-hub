@@ -28,10 +28,10 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
 
 ```bash
 # Clone the project submodule
-git -C ~/claude-hub submodule update --init -- projects/atlas
+git -C ~/claude-hub submodule update --init -- projects/embedded
 
 # Symlink project agents into the project's .claude/agents/
-ln -s ~/claude-hub/projects/atlas/agents/<agent>.md ~/<project>/.claude/agents/<agent>.md
+ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/<project>/.claude/agents/<agent>.md
 ```
 
 ## Adding a New Global Agent

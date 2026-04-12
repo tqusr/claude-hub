@@ -22,10 +22,10 @@
 | Create | `common/agents/obsidian-embedded-kb.md` | Global agent (vault path updated) |
 | Create | `common/agents/yocto-build-engineer.md` | Global agent |
 | Create | `common/vaults/.gitkeep` | Placeholder for future common vaults |
-| Create | `projects/atlas/agents/embedded-system-tester.md` | Atlas-specific agent (inside submodule) |
-| Create | `projects/atlas/agents/obsidian-embedded-kb.md` | Atlas-specific agent (inside submodule) |
-| Create | `projects/atlas/agents/yocto-build-engineer.md` | Atlas-specific agent (inside submodule) |
-| Create | `projects/atlas/vaults/.gitkeep` | Placeholder; vault submodule added later |
+| Create | `projects/embedded/agents/embedded-system-tester.md` | Atlas-specific agent (inside submodule) |
+| Create | `projects/embedded/agents/obsidian-embedded-kb.md` | Atlas-specific agent (inside submodule) |
+| Create | `projects/embedded/agents/yocto-build-engineer.md` | Atlas-specific agent (inside submodule) |
+| Create | `projects/embedded/vaults/.gitkeep` | Placeholder; vault submodule added later |
 | Create | `skills/apply.md` | `/apply` slash command |
 | Create | `plugins.md` | Plugin documentation |
 | Create | `CLAUDE.md` | Repo guidance |
@@ -109,10 +109,10 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
 
 ```bash
 # Clone the project submodule
-git -C ~/claude-hub submodule update --init -- projects/atlas
+git -C ~/claude-hub submodule update --init -- projects/embedded
 
 # Symlink project agents into the project's .claude/agents/
-ln -s ~/claude-hub/projects/atlas/agents/<agent>.md ~/<project>/.claude/agents/<agent>.md
+ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/<project>/.claude/agents/<agent>.md
 ```
 
 ## Adding a New Global Agent
@@ -194,7 +194,7 @@ git commit -m "feat: add global common agents"
 
 ## Task 3: Add obsidian-embedded-kb with updated vault path
 
-Copy `obsidian-embedded-kb.md` into `common/agents/` and replace every occurrence of `~/embedded-documentation/` with `~/claude-hub/projects/atlas/vaults/embedded-documentation/`.
+Copy `obsidian-embedded-kb.md` into `common/agents/` and replace every occurrence of `~/embedded-documentation/` with `~/claude-hub/projects/embedded/vaults/embedded-documentation/`.
 
 **Files:**
 - Create: `common/agents/obsidian-embedded-kb.md`
@@ -208,7 +208,7 @@ cp ~/.claude/agents/obsidian-embedded-kb.md common/agents/obsidian-embedded-kb.m
 - [ ] **Step 2: Replace all vault path references**
 
 ```bash
-sed -i 's|~/embedded-documentation/|~/claude-hub/projects/atlas/vaults/embedded-documentation/|g' common/agents/obsidian-embedded-kb.md
+sed -i 's|~/embedded-documentation/|~/claude-hub/projects/embedded/vaults/embedded-documentation/|g' common/agents/obsidian-embedded-kb.md
 ```
 
 - [ ] **Step 3: Verify the old path is gone**
@@ -222,7 +222,7 @@ Expected: no output (zero matches)
 - [ ] **Step 4: Verify the new path is present**
 
 ```bash
-grep -c "~/claude-hub/projects/atlas/vaults/embedded-documentation/" common/agents/obsidian-embedded-kb.md
+grep -c "~/claude-hub/projects/embedded/vaults/embedded-documentation/" common/agents/obsidian-embedded-kb.md
 ```
 
 Expected: a number greater than 0
@@ -238,39 +238,39 @@ git commit -m "feat: add obsidian-embedded-kb with hub-relative vault path"
 
 ## Task 4: Create atlas project submodule and add project agents
 
-The `projects/atlas/` directory will eventually be a proper git submodule. For now, initialize it as a standalone git repo within the hub so the agents and vault structure are in place. When `embedded-documentation` has a remote, `projects/atlas` can be pushed to its own remote and registered as a submodule of `claude-hub`.
+The `projects/embedded/` directory will eventually be a proper git submodule. For now, initialize it as a standalone git repo within the hub so the agents and vault structure are in place. When `embedded-documentation` has a remote, `projects/embedded` can be pushed to its own remote and registered as a submodule of `claude-hub`.
 
 **Files:**
-- Create: `projects/atlas/agents/embedded-system-tester.md`
-- Create: `projects/atlas/agents/obsidian-embedded-kb.md`
-- Create: `projects/atlas/agents/yocto-build-engineer.md`
-- Create: `projects/atlas/vaults/.gitkeep`
+- Create: `projects/embedded/agents/embedded-system-tester.md`
+- Create: `projects/embedded/agents/obsidian-embedded-kb.md`
+- Create: `projects/embedded/agents/yocto-build-engineer.md`
+- Create: `projects/embedded/vaults/.gitkeep`
 
-- [ ] **Step 1: Initialize projects/atlas as a git repo**
+- [ ] **Step 1: Initialize projects/embedded as a git repo**
 
 ```bash
-mkdir -p projects/atlas/agents projects/atlas/vaults
-git init projects/atlas
-touch projects/atlas/vaults/.gitkeep
+mkdir -p projects/embedded/agents projects/embedded/vaults
+git init projects/embedded
+touch projects/embedded/vaults/.gitkeep
 ```
 
 - [ ] **Step 2: Copy atlas project agents**
 
 ```bash
-cp ~/atlas/.claude/agents/embedded-system-tester.md projects/atlas/agents/
-cp ~/atlas/.claude/agents/obsidian-embedded-kb.md projects/atlas/agents/
-cp ~/atlas/.claude/agents/yocto-build-engineer.md projects/atlas/agents/
+cp ~/atlas/.claude/agents/embedded-system-tester.md projects/embedded/agents/
+cp ~/atlas/.claude/agents/obsidian-embedded-kb.md projects/embedded/agents/
+cp ~/atlas/.claude/agents/yocto-build-engineer.md projects/embedded/agents/
 ```
 
 - [ ] **Step 3: Verify all 3 agent files are present**
 
 ```bash
-ls projects/atlas/agents/
+ls projects/embedded/agents/
 ```
 
 Expected: `embedded-system-tester.md`, `obsidian-embedded-kb.md`, `yocto-build-engineer.md`
 
-- [ ] **Step 4: Write projects/atlas/CLAUDE.md**
+- [ ] **Step 4: Write projects/embedded/CLAUDE.md**
 
 ```markdown
 # CLAUDE.md — Atlas Project Config
@@ -289,33 +289,33 @@ The `embedded-documentation` vault (when added) contains the Yocto/embedded Linu
 ## Applying to a machine
 
 ```bash
-git -C ~/claude-hub submodule update --init -- projects/atlas
-ln -s ~/claude-hub/projects/atlas/agents/<agent>.md ~/atlas/.claude/agents/<agent>.md
+git -C ~/claude-hub submodule update --init -- projects/embedded
+ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/atlas/.claude/agents/<agent>.md
 ```
 ```
 
 - [ ] **Step 5: Commit inside the atlas submodule**
 
 ```bash
-git -C projects/atlas add .
-git -C projects/atlas commit -m "feat: initialize atlas project config with agents"
+git -C projects/embedded add .
+git -C projects/embedded commit -m "feat: initialize atlas project config with agents"
 ```
 
-- [ ] **Step 6: Add projects/atlas as a submodule of claude-hub**
+- [ ] **Step 6: Add projects/embedded as a submodule of claude-hub**
 
 ```bash
-git submodule add ./projects/atlas projects/atlas
+git submodule add ./projects/embedded projects/embedded
 ```
 
-Note: This uses the local path. Once `projects/atlas` is pushed to a remote, update `.gitmodules` with the real URL:
+Note: This uses the local path. Once `projects/embedded` is pushed to a remote, update `.gitmodules` with the real URL:
 ```bash
-git submodule set-url projects/atlas <remote-url>
+git submodule set-url projects/embedded <remote-url>
 ```
 
 - [ ] **Step 7: Commit the submodule registration**
 
 ```bash
-git add .gitmodules projects/atlas
+git add .gitmodules projects/embedded
 git commit -m "feat: add atlas as project submodule"
 ```
 

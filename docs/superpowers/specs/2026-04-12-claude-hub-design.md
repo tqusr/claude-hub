@@ -22,17 +22,17 @@ claude-hub/
 │   │   ├── expert-developer.md
 │   │   ├── workflow-planner.md
 │   │   ├── embedded-system-tester.md
-│   │   ├── obsidian-embedded-kb.md    # vault path updated to ~/claude-hub/projects/atlas/vaults/
+│   │   ├── obsidian-embedded-kb.md    # vault path updated to ~/claude-hub/projects/embedded/vaults/
 │   │   └── yocto-build-engineer.md
 │   └── vaults/                        # Git submodules for shared vaults, cloned by /apply
 ├── projects/
-│   └── atlas/                         # Git submodule — self-contained project config
+│   └── embedded/                      # Git submodule — self-contained project config
 │       ├── agents/
 │       │   ├── embedded-system-tester.md
 │       │   ├── obsidian-embedded-kb.md
 │       │   └── yocto-build-engineer.md
 │       └── vaults/
-│           └── embedded-documentation/  # Git submodule within atlas submodule
+│           └── embedded-documentation/  # Git submodule within embedded submodule
 ├── skills/
 │   └── apply.md                       # The /apply Claude Code skill
 ├── plugins.md                         # Plugin documentation and install commands
@@ -54,7 +54,7 @@ The top level divides by scope, not by resource type:
 
 These are global agents that apply on every machine. `/apply` creates symlinks from `~/.claude/agents/<name>.md` → `~/claude-hub/common/agents/<name>.md`.
 
-The `obsidian-embedded-kb` agent is stored in the hub with the vault path updated to `~/claude-hub/projects/atlas/vaults/embedded-documentation/` (instead of `~/embedded-documentation/`). The original agent at `~/.claude/agents/obsidian-embedded-kb.md` is not modified.
+The `obsidian-embedded-kb` agent is stored in the hub with the vault path updated to `~/claude-hub/projects/embedded/vaults/embedded-documentation/` (instead of `~/embedded-documentation/`). The original agent at `~/.claude/agents/obsidian-embedded-kb.md` is not modified.
 
 ---
 
@@ -63,7 +63,7 @@ The `obsidian-embedded-kb` agent is stored in the hub with the vault path update
 Each project directory is a **git submodule** with its own repository. It contains whatever config is relevant to that project:
 
 ```
-projects/atlas/
+projects/embedded/
 ├── agents/       # Project-specific agents
 └── vaults/       # Project-specific vaults (git submodules within this repo)
 ```
@@ -72,17 +72,17 @@ Project submodules are **not** applied automatically by `/apply`. When starting 
 
 ```bash
 # Clone the project submodule
-git -C ~/claude-hub submodule update --init -- projects/atlas
+git -C ~/claude-hub submodule update --init -- projects/embedded
 
 # Symlink project agents into the project's .claude/agents/
-ln -s ~/claude-hub/projects/atlas/agents/<agent>.md ~/atlas/.claude/agents/<agent>.md
+ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/atlas/.claude/agents/<agent>.md
 ```
 
 Currently registered project submodules:
 
 | Path | Description |
 |------|-------------|
-| `projects/atlas/` | Atlas/Yocto embedded Linux project — agents and vaults |
+| `projects/embedded/` | Atlas/Yocto embedded Linux project — agents and vaults |
 
 ---
 
@@ -94,7 +94,7 @@ Currently registered vaults:
 
 | Path | Project | Description |
 |------|---------|-------------|
-| `projects/atlas/vaults/embedded-documentation` | atlas | Yocto/embedded Linux knowledge wiki |
+| `projects/embedded/vaults/embedded-documentation` | atlas | Yocto/embedded Linux knowledge wiki |
 
 ### Vault structure convention
 
