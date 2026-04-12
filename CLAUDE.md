@@ -9,7 +9,7 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
 ## Repository Structure
 
 - `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `/apply`
-- `common/vaults/` — shared knowledge vaults (git submodules), cloned by `/apply`
+- `common/vaults/` — shared knowledge vaults (regular directories, committed to this repo)
 - `projects/<project>/` — git submodule per project, containing `agents/` and `vaults/`
 - `skills/apply.md` — the `/apply` slash command
 - `plugins.md` — plugin documentation and install commands
@@ -22,7 +22,7 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
    mkdir -p ~/.claude/commands
    ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
    ```
-3. Run `/apply` in a Claude Code session — it will symlink agents, clone common vaults, and install plugins.
+3. Run `/apply` in a Claude Code session — it will symlink agents and install plugins.
 
 ## Working on a Project
 
@@ -47,10 +47,8 @@ Add to `common/agents/` and commit. Run `/apply` (or manually symlink) to activa
 
 ## Adding a New Vault
 
-- Push the vault to a remote git repo
-- Common vault: `git submodule add <url> common/vaults/<name>`
-- Project vault: add inside the project submodule at `vaults/<name>`
-- Common vaults are cloned automatically by `/apply`; project vaults are cloned with the project submodule
+- Common vault: add the vault directory to `common/vaults/<name>` and commit
+- Project vault: add inside the project submodule at `vaults/<name>` and commit + push the submodule
 
 ## Vault Structure Convention
 

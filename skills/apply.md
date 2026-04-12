@@ -26,15 +26,7 @@ done
 
 For any CONFLICT lines, pause and ask the user: "~/.claude/agents/<name> is a regular file, not a symlink. Replace with symlink or skip?" before continuing.
 
-## 2. Clone common vaults
-
-```bash
-git -C ~/claude-hub submodule update --init --recursive -- common/vaults/
-```
-
-If `common/vaults/` has no submodules yet, this is a no-op — that is fine.
-
-## 3. Install plugins
+## 2. Install plugins
 
 ```bash
 claude plugin install superpowers@claude-plugins-official
@@ -43,7 +35,7 @@ claude plugin install claude-hud@claude-hud
 
 If a plugin is already installed, the command skips it gracefully.
 
-## 4. Report summary
+## 3. Report summary
 
 Print what was:
 - Symlinked (new)
