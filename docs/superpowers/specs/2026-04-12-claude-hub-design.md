@@ -19,11 +19,7 @@ claude-hub/
 │   ├── agents/                        # Global agents, symlinked to ~/.claude/agents/ by /apply
 │   │   ├── code-documenter.md
 │   │   ├── expert-debugger.md
-│   │   ├── expert-developer.md
-│   │   ├── workflow-planner.md
-│   │   ├── embedded-system-tester.md
-│   │   ├── obsidian-embedded-kb.md    # vault path updated to ~/claude-hub/projects/embedded/vaults/
-│   │   └── yocto-build-engineer.md
+│   │   └── expert-developer.md
 │   └── vaults/                        # Git submodules for shared vaults, cloned by /apply
 ├── projects/
 │   └── embedded/                      # Git submodule — self-contained project config
@@ -53,8 +49,6 @@ The top level divides by scope, not by resource type:
 ## Common Agents (`common/agents/`)
 
 These are global agents that apply on every machine. `/apply` creates symlinks from `~/.claude/agents/<name>.md` → `~/claude-hub/common/agents/<name>.md`.
-
-The `obsidian-embedded-kb` agent is stored in the hub with the vault path updated to `~/claude-hub/projects/embedded/vaults/embedded-documentation/` (instead of `~/embedded-documentation/`). The original agent at `~/.claude/agents/obsidian-embedded-kb.md` is not modified.
 
 ---
 
