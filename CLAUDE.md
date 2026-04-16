@@ -11,7 +11,8 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
 - `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `/apply`
 - `common/vaults/` — shared knowledge vaults (regular directories, committed to this repo)
 - `projects/<project>/` — git submodule per project, containing `agents/` and `vaults/`
-- `skills/apply.md` — the `/apply` slash command
+- `skills/apply.md` — the `/apply` slash command (thin wrapper around `scripts/apply.sh`)
+- `scripts/apply.sh` — the apply implementation
 - `plugins.md` — plugin documentation and install commands
 
 ## Bootstrapping a New Machine
@@ -22,7 +23,7 @@ Centralized store for Claude Code configuration: agents, knowledge vaults, and p
    mkdir -p ~/.claude/commands
    ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
    ```
-3. Run `/apply` in a Claude Code session — it will symlink agents and install plugins.
+3. Run `/apply` in a Claude Code session (or `bash ~/claude-hub/scripts/apply.sh` directly) — it will symlink agents and install plugins.
 
 ## Working on a Project
 
