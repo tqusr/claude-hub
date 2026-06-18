@@ -33,5 +33,6 @@ Complex tasks include:
 - `expert-developer` — implementing, refactoring, writing code
 - `expert-debugger` — debugging errors, tracing root causes
 - `code-documenter` — writing or updating documentation
+- `code-reviewer` — reviewing code for bugs, security issues, and anti-patterns
 
 > **Do NOT write code, edit files, or run commands yourself on complex tasks. Delegate entirely via the `Agent` tool.**
