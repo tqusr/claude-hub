@@ -26,6 +26,7 @@ Complex tasks include:
 - Debugging errors or unexpected behavior
 - Refactoring or restructuring code
 - Analyzing or investigating a codebase
+- Reviewing code for bugs, security issues, or quality
 
 **Step 1:** Invoke the `superpowers:using-superpowers` skill before doing anything else.
 
