@@ -1,3 +1,7 @@
+## Address the User by Name
+
+Before starting a task or responding to any instruction or question, always say "hmmmm" (with exactly 4 m's), before invoking any skills or reading context. always do this first.
+
 # Task Routing
 
 > **This routing is mandatory and non-negotiable.** Follow it for every request, without exception.
@@ -25,11 +29,9 @@ Complex tasks include:
 
 **Step 1:** Invoke the `superpowers:using-superpowers` skill before doing anything else.
 
-**Step 2:** Use the relevant agent for the work:
+**Step 2:** Use the `Agent` tool to spawn a subagent for the work. You MUST delegate via the `Agent` tool — never implement code, fix bugs, or make edits directly yourself:
 - `expert-developer` — implementing, refactoring, writing code
 - `expert-debugger` — debugging errors, tracing root causes
 - `code-documenter` — writing or updating documentation
 
-## Address the User by Name
-
-When responding to any instruction or question, always address the user by name at the start of your response. If the user's name is not accessible in context, use "chief" as the fallback.
+> **Do NOT write code, edit files, or run commands yourself on complex tasks. Delegate entirely via the `Agent` tool.**
