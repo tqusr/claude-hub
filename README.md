@@ -7,12 +7,12 @@ Centralized Claude Code configuration — agents and plugins — managed as a gi
 ```
 claude-hub/
 ├── common/
-│   └── agents/        # Global agents, symlinked to ~/.claude/agents/ by /apply
+│   └── agents/        # Global agents, symlinked to ~/.claude/agents/ by apply.sh
 ├── projects/
 │   └── <project>/     # Project-specific config (git submodule)
 │       └── agents/    # Project-specific agents
-├── skills/
-│   └── apply.md       # /apply slash command
+├── scripts/
+│   └── apply.sh       # Symlinks agents and installs plugins
 └── plugins.md         # Plugin documentation and install commands
 ```
 
@@ -20,11 +20,10 @@ claude-hub/
 
 ```bash
 git clone git@github.com:tqusr/claude-hub.git ~/claude-hub
-mkdir -p ~/.claude/commands
-ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
+bash ~/claude-hub/scripts/apply.sh
 ```
 
-Then run `/apply` in a Claude Code session. It will:
+It will:
 1. Symlink all common agents into `~/.claude/agents/`
 2. Install plugins (`superpowers`, `claude-hud`)
 

@@ -4,27 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-Centralized store for Claude Code configuration: agents and plugins. Clone this repo and run `/apply` to configure a new machine.
+Centralized store for Claude Code configuration: agents and plugins. Clone this repo and run `bash ~/claude-hub/scripts/apply.sh` to configure a new machine.
 
 ## Repository Structure
 
-- `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `/apply`
-- `common/_claude.md` — optional; applied to `~/.claude/CLAUDE.md` by `/apply`
+- `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `apply.sh`
+- `common/_claude.md` — optional; applied to `~/.claude/CLAUDE.md` by `apply.sh`
 - `projects/<project>/` — git submodule per project, containing `agents/`
-- `projects/<project>/_claude.md` — optional; applied to the project's `CLAUDE.md` by `/apply`
-- `skills/apply.md` — the `/apply` slash command (thin wrapper around `scripts/apply.sh`)
-- `scripts/apply.sh` — the apply implementation
+- `projects/<project>/_claude.md` — optional; applied to the project's `CLAUDE.md` by `apply.sh`
+- `scripts/apply.sh` — symlinks agents and installs plugins
 - `plugins.md` — plugin documentation and install commands
 
 ## Bootstrapping a New Machine
 
 1. Clone this repo: `git clone <remote> ~/claude-hub`
-2. Register the `/apply` command:
-   ```bash
-   mkdir -p ~/.claude/commands
-   ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
-   ```
-3. Run `/apply` in a Claude Code session (or `bash ~/claude-hub/scripts/apply.sh` directly) — it will symlink agents and install plugins.
+2. Run `bash ~/claude-hub/scripts/apply.sh` — it will symlink agents and install plugins.
 
 ## Working on a Project
 
@@ -38,7 +32,7 @@ ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/<project>/.claude/agent
 
 ## Adding a New Global Agent
 
-Add to `common/agents/` and commit. Run `/apply` (or manually symlink) to activate.
+Add to `common/agents/` and commit. Run `bash ~/claude-hub/scripts/apply.sh` (or manually symlink) to activate.
 
 ## Adding a _claude.md
 
@@ -46,7 +40,7 @@ Place a `_claude.md` at:
 - `common/_claude.md` — applied to `~/.claude/CLAUDE.md` (global Claude config)
 - `projects/<project>/_claude.md` — applied to the project's `CLAUDE.md`
 
-When `/apply` runs and finds a `_claude.md`, it prompts:
+When `apply.sh` runs and finds a `_claude.md`, it prompts:
 - **Copy/override** — replaces the target `CLAUDE.md` with this file
 - **Reference** — prepends a pointer to the top of the existing target
 
