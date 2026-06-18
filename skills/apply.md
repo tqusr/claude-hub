@@ -1,5 +1,5 @@
 ---
-description: Bootstrap this machine with agents, vaults, and plugins from claude-hub
+description: Bootstrap this machine with agents and plugins from claude-hub
 ---
 
 Run the apply script:

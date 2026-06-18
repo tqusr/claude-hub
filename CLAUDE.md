@@ -4,13 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-Centralized store for Claude Code configuration: agents, knowledge vaults, and plugins. Clone this repo and run `/apply` to configure a new machine.
+Centralized store for Claude Code configuration: agents and plugins. Clone this repo and run `/apply` to configure a new machine.
 
 ## Repository Structure
 
 - `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `/apply`
-- `common/vaults/` — shared knowledge vaults (regular directories, committed to this repo)
-- `projects/<project>/` — git submodule per project, containing `agents/` and `vaults/`
+- `projects/<project>/` — git submodule per project, containing `agents/`
 - `skills/apply.md` — the `/apply` slash command (thin wrapper around `scripts/apply.sh`)
 - `scripts/apply.sh` — the apply implementation
 - `plugins.md` — plugin documentation and install commands
@@ -43,19 +42,5 @@ Add to `common/agents/` and commit. Run `/apply` (or manually symlink) to activa
 
 1. Create a new git repo for the project config (e.g. `atlas-claude-config`)
 2. Add it as a submodule: `git submodule add <url> projects/<project>`
-3. Inside the submodule, create `agents/` and `vaults/` as needed
+3. Inside the submodule, create `agents/` as needed
 4. Commit the `.gitmodules` change in claude-hub
-
-## Adding a New Vault
-
-- Common vault: add the vault directory to `common/vaults/<name>` and commit
-- Project vault: add inside the project submodule at `vaults/<name>` and commit + push the submodule
-
-## Vault Structure Convention
-
-Each vault follows the `embedded-documentation` pattern:
-- `raw/` — immutable source documents (never edited by agents)
-- `wiki/` — LLM-generated markdown organized by category
-- `index.md` — lean master index (~50 lines)
-- `log.md` — append-only operation log
-- `CLAUDE.md` — governs agent behavior within the vault
