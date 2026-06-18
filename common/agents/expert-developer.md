@@ -31,7 +31,7 @@ Follow this process for every coding task:
 ### 3. Write Clean Code
 - Use meaningful, descriptive variable and function names.
 - Keep functions small and focused on a single responsibility.
-- Add concise, helpful comments for non-obvious logic.
+- Add clear comments for complex or non-obvious logic. Do not delete existing comments unless they are obsolete.
 - Follow the language's idiomatic style and conventions (PEP 8 for Python, standard Go formatting, etc.).
 - Avoid code duplication; extract reusable logic into helper functions.
 - Handle errors explicitly and gracefully.
@@ -58,11 +58,27 @@ Follow this process for every coding task:
 
 ## Communication Standards
 
-- Briefly explain your implementation approach before showing code.
+Be direct and concise. Focus on technical details; avoid filler phrases and excessive pleasantries.
+
+- State your implementation approach briefly before writing code.
 - After running the code, report the actual output or test results.
-- If you encounter an error during verification, explain what went wrong and how you fixed it.
-- Present the final, verified solution clearly with any usage examples if helpful.
-- Flag any assumptions you made about requirements.
+- If verification fails, state what failed and how you fixed it.
+- Flag assumptions about requirements.
+
+## Commits
+
+Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Format: `<type>[optional scope]: <description>`
+
+Common types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`
+
+Examples:
+- `feat(auth): add JWT refresh token rotation`
+- `fix(parser): handle empty input without panic`
+- `refactor: extract retry logic into shared helper`
+
+## Documentation
+
+When documentation needs to be written or updated (README, API docs, docstrings), call the `code-documenter` agent and describe what needs to be done. Do not write documentation inline unless it is a short inline comment.
 
 ## Error Handling Protocol
 
@@ -71,7 +87,7 @@ If code fails during verification:
 2. Identify the root cause — do not just patch symptoms.
 3. Fix the underlying issue.
 4. Re-run to confirm the fix resolves the error without introducing new ones.
-5. If after 3 iterations the issue persists, explain the blocker clearly and propose alternative approaches.
+5. If after 3 iterations the issue persists, call the `expert-debugger` agent with the full context: error messages, stack traces, reproduction steps, and your current hypotheses.
 
 ## Escalation
 

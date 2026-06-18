@@ -4,26 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-Centralized store for Claude Code configuration: agents, knowledge vaults, and plugins. Clone this repo and run `/apply` to configure a new machine.
+Centralized store for Claude Code configuration: agents and plugins. Clone this repo and run `bash ~/claude-hub/scripts/apply.sh` to configure a new machine.
 
 ## Repository Structure
 
-- `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `/apply`
-- `common/vaults/` — shared knowledge vaults (regular directories, committed to this repo)
-- `projects/<project>/` — git submodule per project, containing `agents/` and `vaults/`
-- `skills/apply.md` — the `/apply` slash command (thin wrapper around `scripts/apply.sh`)
-- `scripts/apply.sh` — the apply implementation
+- `common/agents/` — global agents, symlinked to `~/.claude/agents/` by `apply.sh`
+- `common/_claude.md` — optional; applied to `~/.claude/CLAUDE.md` by `apply.sh`
+- `projects/<project>/` — git submodule per project, containing `agents/`
+- `projects/<project>/_claude.md` — optional; applied to the project's `CLAUDE.md` by `apply.sh`
+- `scripts/apply.sh` — symlinks agents and installs plugins
 - `plugins.md` — plugin documentation and install commands
 
 ## Bootstrapping a New Machine
 
 1. Clone this repo: `git clone <remote> ~/claude-hub`
-2. Register the `/apply` command:
-   ```bash
-   mkdir -p ~/.claude/commands
-   ln -s ~/claude-hub/skills/apply.md ~/.claude/commands/apply.md
-   ```
-3. Run `/apply` in a Claude Code session (or `bash ~/claude-hub/scripts/apply.sh` directly) — it will symlink agents and install plugins.
+2. Run `bash ~/claude-hub/scripts/apply.sh` — it will symlink agents and install plugins.
 
 ## Working on a Project
 
@@ -37,25 +32,21 @@ ln -s ~/claude-hub/projects/embedded/agents/<agent>.md ~/<project>/.claude/agent
 
 ## Adding a New Global Agent
 
-Add to `common/agents/` and commit. Run `/apply` (or manually symlink) to activate.
+Add to `common/agents/` and commit. Run `bash ~/claude-hub/scripts/apply.sh` (or manually symlink) to activate.
+
+## Adding a _claude.md
+
+Place a `_claude.md` at:
+- `common/_claude.md` — applied to `~/.claude/CLAUDE.md` (global Claude config)
+- `projects/<project>/_claude.md` — applied to the project's `CLAUDE.md`
+
+When `apply.sh` runs and finds a `_claude.md`, it prompts:
+- **Copy/override** — replaces the target `CLAUDE.md` with this file
+- **Reference** — prepends a pointer to the top of the existing target
 
 ## Adding a New Project
 
 1. Create a new git repo for the project config (e.g. `atlas-claude-config`)
 2. Add it as a submodule: `git submodule add <url> projects/<project>`
-3. Inside the submodule, create `agents/` and `vaults/` as needed
+3. Inside the submodule, create `agents/` as needed
 4. Commit the `.gitmodules` change in claude-hub
-
-## Adding a New Vault
-
-- Common vault: add the vault directory to `common/vaults/<name>` and commit
-- Project vault: add inside the project submodule at `vaults/<name>` and commit + push the submodule
-
-## Vault Structure Convention
-
-Each vault follows the `embedded-documentation` pattern:
-- `raw/` — immutable source documents (never edited by agents)
-- `wiki/` — LLM-generated markdown organized by category
-- `index.md` — lean master index (~50 lines)
-- `log.md` — append-only operation log
-- `CLAUDE.md` — governs agent behavior within the vault

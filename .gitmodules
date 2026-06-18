@@ -1,3 +1,0 @@
-[submodule "projects/embedded"]
-	path = projects/embedded
-	url = git@github.com:tqusr/claude-embedded.git

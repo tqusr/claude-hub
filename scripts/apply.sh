@@ -49,7 +49,73 @@ for entry in "${conflicts[@]+"${conflicts[@]}"}"; do
 done
 
 # ---------------------------------------------------------------------------
-# 2. Install plugins
+# 2. Apply _claude.md files
+# ---------------------------------------------------------------------------
+
+claude_md_applied=()
+claude_md_skipped=()
+
+apply_claude_md() {
+  local src="$1"
+  local dst="$2"
+  local label="$3"
+
+  [ -f "$src" ] || return 0
+
+  echo ""
+  echo "_claude.md found for $label"
+  echo "  Source: $src"
+  echo "  Target: $dst"
+  echo ""
+  echo "  [c] Copy/override  — replace target with this file"
+  echo "  [r] Reference      — prepend a pointer in the existing target"
+  echo "  [s] Skip"
+  read -r -p "  Choice [c/r/s]: " choice
+
+  case "$choice" in
+    [Cc])
+      mkdir -p "$(dirname "$dst")"
+      cp "$src" "$dst"
+      claude_md_applied+=("$label (copied)")
+      ;;
+    [Rr])
+      mkdir -p "$(dirname "$dst")"
+      if grep -qF "$src" "$dst" 2>/dev/null; then
+        claude_md_skipped+=("$label (reference already present)")
+      else
+        local tmp
+        tmp=$(mktemp)
+        {
+          printf '> **Important:** Also read `%s` for important instructions.\n\n' "$src"
+          [ -f "$dst" ] && cat "$dst" || true
+        } > "$tmp"
+        mv "$tmp" "$dst"
+        claude_md_applied+=("$label (referenced)")
+      fi
+      ;;
+    *)
+      claude_md_skipped+=("$label")
+      ;;
+  esac
+}
+
+# Common: common/_claude.md → ~/.claude/CLAUDE.md
+apply_claude_md "$HUB_DIR/common/_claude.md" "$HOME/.claude/CLAUDE.md" "global (~/.claude/CLAUDE.md)"
+
+# Projects: projects/<name>/_claude.md → <project-root>/CLAUDE.md
+for proj_dir in "$HUB_DIR/projects"/*/; do
+  [ -d "$proj_dir" ] || continue
+  src="${proj_dir}_claude.md"
+  [ -f "$src" ] || continue
+  proj_name="$(basename "$proj_dir")"
+  echo ""
+  read -r -p "Project '$proj_name': enter project root path [default: $HOME/$proj_name]: " proj_root
+  proj_root="${proj_root:-$HOME/$proj_name}"
+  apply_claude_md "$src" "$proj_root/CLAUDE.md" "project $proj_name ($proj_root/CLAUDE.md)"
+done
+
+# ---------------------------------------------------------------------------
+# 3. Install plugins
 # ---------------------------------------------------------------------------
 
 plugins_installed=()
@@ -90,7 +156,7 @@ install_plugin "superpowers@claude-plugins-official"
 install_plugin "claude-hud@claude-hud"
 
 # ---------------------------------------------------------------------------
-# 3. Summary
+# 4. Summary
 # ---------------------------------------------------------------------------
 
 echo ""
@@ -130,6 +196,18 @@ if [ ${#plugins_failed[@]} -gt 0 ]; then
   echo ""
   echo "Plugins FAILED to install:"
   for n in "${plugins_failed[@]}"; do echo "  ! $n"; done
+fi
+
+if [ ${#claude_md_applied[@]} -gt 0 ]; then
+  echo ""
+  echo "CLAUDE.md applied:"
+  for n in "${claude_md_applied[@]}"; do echo "  + $n"; done
+fi
+
+if [ ${#claude_md_skipped[@]} -gt 0 ]; then
+  echo ""
+  echo "CLAUDE.md skipped:"
+  for n in "${claude_md_skipped[@]}"; do echo "  - $n"; done
 fi
 
 echo ""
