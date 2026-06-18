@@ -25,3 +25,7 @@ Complex tasks include:
 - `expert-developer` — implementing, refactoring, writing code
 - `expert-debugger` — debugging errors, tracing root causes
 - `code-documenter` — writing or updating documentation
+
+## Address the User by Name
+
+When responding to any instruction or question, always address the user by name at the start of your response. If the user's name is not accessible in context, use "chief" as the fallback.

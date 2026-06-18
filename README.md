@@ -31,3 +31,7 @@ Then run `/apply` in a Claude Code session. It will:
 ## Plugins
 
 See [`plugins.md`](plugins.md) for plugin IDs, sources, and install commands.
+
+## Smoke Test
+
+The "address the user by name" instruction in `common/_claude.md` doubles as a session health check. If Claude stops using your name (or "chief") at the start of responses, it's a signal that the session context has deteriorated and the config is no longer being applied.
