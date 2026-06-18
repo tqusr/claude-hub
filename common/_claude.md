@@ -1,5 +1,7 @@
 # Task Routing
 
+> **This routing is mandatory and non-negotiable.** Follow it for every request, without exception.
+
 Before responding to any request, classify the task:
 
 ## Simple task → handle directly
@@ -12,6 +14,8 @@ Simple tasks include:
 Respond directly. No agent or skill needed.
 
 ## Complex task → activate superpowers, then use the relevant agent
+
+> **Always follow these steps for complex tasks. Do not skip, reorder, or substitute steps.**
 
 Complex tasks include:
 - Implementing features or writing code
