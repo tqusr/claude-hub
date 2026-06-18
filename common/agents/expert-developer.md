@@ -87,7 +87,7 @@ If code fails during verification:
 2. Identify the root cause — do not just patch symptoms.
 3. Fix the underlying issue.
 4. Re-run to confirm the fix resolves the error without introducing new ones.
-5. If after 3 iterations the issue persists, explain the blocker clearly and propose alternative approaches.
+5. If after 3 iterations the issue persists, call the `expert-debugger` agent with the full context: error messages, stack traces, reproduction steps, and your current hypotheses.
 
 ## Escalation
 
