@@ -1,0 +1,3 @@
+[submodule "projects/cve-patcher"]
+	path = projects/cve-patcher
+	url = git@github.com:tqusr/cve-patcher.git
