@@ -61,21 +61,27 @@ fi
 mkdir -p "$SKILLS_DST"
 
 SKILLS_SRC="$PROJECT_DIR/skills"
-if [[ -d "$SKILLS_SRC" ]] && compgen -G "$SKILLS_SRC/*.md" > /dev/null 2>&1; then
-  for f in "$SKILLS_SRC"/*.md; do
-    [[ -e "$f" ]] || continue
-    name="$(basename "$f")"
+# Skills are directories containing SKILL.md (e.g. skills/patch-cves/SKILL.md)
+if [[ -d "$SKILLS_SRC" ]]; then
+  found_skills=0
+  for d in "$SKILLS_SRC"/*/; do
+    [[ -d "$d" ]] || continue
+    [[ -f "$d/SKILL.md" ]] || continue
+    found_skills=1
+    name="$(basename "$d")"
     target="$SKILLS_DST/$name"
-    if [[ -L "$target" ]]; then
-      ln -sf "$f" "$target"
+    if [[ -L "$target" || -d "$target" ]]; then
+      rm -f "$target"
+      ln -s "$d" "$target"
       skills_replaced+=("$name")
     else
-      ln -s "$f" "$target"
+      ln -s "$d" "$target"
       skills_new+=("$name")
     fi
   done
+  [[ $found_skills -eq 0 ]] && echo "(no skills/<name>/SKILL.md found — skipping skill symlinks)"
 else
-  echo "(no skills/*.md files — skipping skill symlinks)"
+  echo "(no skills/ directory — skipping skill symlinks)"
 fi
 
 # ---------------------------------------------------------------------------
