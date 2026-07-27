@@ -1,4 +1,4 @@
-## Address the User by Name
+## Start answer by...
 
 Before starting a task or responding to any instruction or question, always say "hmmmm" (with exactly 4 m's), before invoking any skills or reading context. always do this first.
 
@@ -27,10 +27,11 @@ Complex tasks include:
 - Refactoring or restructuring code
 - Analyzing or investigating a codebase
 - Reviewing code for bugs, security issues, or quality
+**Step 1:** If you are a spawned agent from another agent, do the instructions and break these steps.
 
-**Step 1:** Invoke the `superpowers:using-superpowers` skill before doing anything else.
+**Step 2:** Invoke the `superpowers:using-superpowers` skill before doing anything else.
 
-**Step 2:** Use the `Agent` tool to spawn a subagent for the work. You MUST delegate via the `Agent` tool — never implement code, fix bugs, or make edits directly yourself:
+**Step 3:** Use the `Agent` tool to spawn a subagent for the work. You MUST delegate via the `Agent` tool — never implement code, fix bugs, or make edits directly yourself:
 - `expert-developer` — implementing, refactoring, writing code
 - `expert-debugger` — debugging errors, tracing root causes
 - `code-documenter` — writing or updating documentation
