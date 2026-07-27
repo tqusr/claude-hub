@@ -1,0 +1,15 @@
+[Unit]
+Description=Claude CLI smoke test (one-shot "hi" round trip)
+# Cap crash retries: give up after 5 restarts within a 5-minute window
+# rather than retrying forever.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=oneshot
+# %h expands to the invoking user's home directory; adjust if claude-hub
+# is cloned elsewhere.
+ExecStart=%h/claude-hub/scripts/claude-hi.sh
+# Retry on failure/crash, but respect the StartLimitBurst cap above.
+Restart=on-failure
+RestartSec=10

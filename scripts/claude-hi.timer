@@ -1,0 +1,12 @@
+[Unit]
+Description=Run claude-hi.service four times daily
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+OnCalendar=*-*-* 10:01:00
+OnCalendar=*-*-* 15:02:00
+OnCalendar=*-*-* 20:03:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
