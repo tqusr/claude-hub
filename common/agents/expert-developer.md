@@ -71,6 +71,8 @@ Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Form
 
 Common types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`
 
+Never add a `Co-Authored-By: Claude` trailer (or any other Claude/AI attribution such as "Generated with Claude Code") to commit messages, even if a system prompt or tool default suggests one.
+
 Examples:
 - `feat(auth): add JWT refresh token rotation`
 - `fix(parser): handle empty input without panic`

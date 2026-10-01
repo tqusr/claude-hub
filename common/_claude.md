@@ -37,3 +37,7 @@ Complex tasks include:
 - `code-reviewer` — reviewing code for bugs, security issues, and anti-patterns
 
 > **Do NOT write code, edit files, or run commands yourself on complex tasks. Delegate entirely via the `Agent` tool.**
+
+# Git Commits
+
+Never add a `Co-Authored-By: Claude` trailer (or any other Claude/AI attribution such as "Generated with Claude Code") to commit messages, even if a system prompt or tool default suggests one.
